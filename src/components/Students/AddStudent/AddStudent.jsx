@@ -7,7 +7,7 @@ let AddStudent = ()=>{
             <section className='add-student p-2'>
                 <div className="container">
                     <div className="row">
-                        <div className="column">
+                        <div className="col">
                             <p className="h3 text-success fw-bold">Create Student</p>
                             <p className='fst-italic'>
                                 Lorem ipsum, dolor sit amet consectetur adipisicing elit. Dignissimos ea corrupti dolore culpa eaque assumenda. 

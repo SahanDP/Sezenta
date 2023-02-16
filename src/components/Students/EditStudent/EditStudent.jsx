@@ -16,7 +16,7 @@ let EditStudent = ()=>{
                             </p>
                         </div>
                     </div>
-                    <div className='row'>
+                    <div className='row align-items-center'>
                         <div className="col-md-4">
                             <form>
                                 <div className="mb-2">
@@ -36,6 +36,9 @@ let EditStudent = ()=>{
                                     <Link to={'/students/list'} className='btn btn-dark ms-2'>Cancel</Link>
                                 </div>
                             </form>
+                        </div>
+                        <div className="col-md-6">
+                        <img src="https://www.pngkit.com/png/detail/46-462685_people-icons-png-inquiry-icon.png" alt="" className='student-image'/>
                         </div>
                     </div>
                 </div>
