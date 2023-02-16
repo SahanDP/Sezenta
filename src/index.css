@@ -1,0 +1,9 @@
+body{
+    background-color: orange;  /*havent applied*/
+}
+
+.student-image{
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+}
