@@ -1,11 +1,26 @@
-import React from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import '../../../index.css';  //added recently  
+import { UserCard } from './UserCard';
+import axios from 'axios';
 
-let StudentList = ()=>{
+const StudentList = ()=>{
+    const [userData, setUserData] = useState([]);
+    const getData = useCallback(() => {
+        axios.get('http://localhost:8000/student/get')
+            .then(function (response) {
+                setUserData(response.data.existingStudents);
+            })
+            .catch(function (error) {
+                console.log(error);
+            });
+    },[])
+    useEffect(() => {
+        getData();
+    }, [])
     return (
         <React.Fragment>
-            <section className='contact-search p-4'>
+            <section className='student-search p-4'>
                 <div className='container'>
                     <div className='grid'>
                         <div className='row'>
@@ -42,250 +57,27 @@ let StudentList = ()=>{
             <section className='student-list'>
                 <div className="container">
                     <div className="row">
-                        <div className="col-md-6">
-                            <div className="card">
-                                <div className="card-body">
-                                    <div className='row align-items-center'>
-                                        <div className="col-md-4">
-                                            <img src="https://www.pngkit.com/png/detail/46-462685_people-icons-png-inquiry-icon.png" className='student-image'/>
-                                        </div>
-                                        <div className="col-md-7">
-                                            <ul className='list-group'>
-                                                <li className='list-group-item list-group-item-action'>
-                                                    name : <span>Sahan</span>
-                                                </li>
-                                                <li className='list-group-item list-group-item-action'>
-                                                    index : 22813
-                                                </li>
-                                                <li className='list-group-item list-group-item-action'>
-                                                    Description : Lorem ipsum dolor sit amet consectetur adipisicing elit. Quaerat, ab possimus ea debitis 
-                                                                  error ad temporibus vitae voluptatem quibusdam quidem necessitatibus ex perspiciatis nisi 
-                                                                  molestias. Fuga exercitationem voluptatem accusamus provident.
-                                                </li>
-                                            </ul>
-                                        </div>
-                                        <div className="col-md-1">
-                                            <Link to={'/students/view/:contactID'} className='btn btn-warning'>
-                                                <i className='fa fa-eye'/>
-                                            </Link>
-                                            <Link to={'/students/edit/:contactID'} className='btn btn-primary'>
-                                                <i className='fa fa-pen'/>
-                                            </Link>
-                                            <button className='btn btn-danger'>
-                                                <i className='fa fa-trash'/>
-                                            </button>
-                                        </div>
-                                    </div>
-                                    {/* <div className="col-md-1">
-                                        <Link to={'/students/view/:contactID'} className='btn btn-warning'>
-                                            <i className='fa fa-eye'/>
-                                        </Link>
-                                        <Link to={'/students/edit/:contactID'} className='btn btn-primary'>
-                                            <i className='fa fa-pen'/>
-                                        </Link>
-                                        <button className='btn btn-danger'>
-                                            <i className='fa fa-trash'/>
-                                        </button>
-                                    </div> */}
-                                </div>
+                        {userData.map((e, i) =>
+                            <div className="col-md-6"  key={e._id} >
+                        
+                                <UserCard
+                                       
+                                        id={e._id} 
+                                        name={e.name} 
+                                        image={e.image} 
+                                        index={e.index}
+                                        description={e.description}
+                                        onDelete={() => getData()}
+                                /> 
                             </div>
-                        </div>
-
-                        <div className="col-md-6">
-                            <div className="card">
-                                <div className="card-body">
-                                    <div className='row align-items-center'>
-                                        <div className="col-md-4">
-                                            <img src="https://www.pngkit.com/png/detail/46-462685_people-icons-png-inquiry-icon.png" className='student-image'/>
-                                        </div>
-                                        <div className="col-md-7">
-                                            <ul className='list-group'>
-                                                <li className='list-group-item list-group-item-action'>
-                                                    name : <span>Sahan</span>
-                                                </li>
-                                                <li className='list-group-item list-group-item-action'>
-                                                    index : 22813
-                                                </li>
-                                                <li className='list-group-item list-group-item-action'>
-                                                    Description : Lorem ipsum dolor sit amet consectetur adipisicing elit. Quaerat, ab possimus ea debitis 
-                                                                  error ad temporibus vitae voluptatem quibusdam quidem necessitatibus ex perspiciatis nisi 
-                                                                  molestias. Fuga exercitationem voluptatem accusamus provident.
-                                                </li>
-                                            </ul>
-                                        </div>
-                                    </div>
-                                    <div className="col-md-1">
-                                        <Link to={'/students/view/:contactID'} className='btn btn-warning'>
-                                            <i className='fa fa-eye'/>
-                                        </Link>
-                                        <Link to={'/students/edit/:contactID'} className='btn btn-primary'>
-                                            <i className='fa fa-pen'/>
-                                        </Link>
-                                        <button className='btn btn-danger'>
-                                            <i className='fa fa-trash'/>
-                                        </button>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div className="col-md-6">
-                            <div className="card">
-                                <div className="card-body">
-                                    <div className='row align-items-center'>
-                                        <div className="col-md-4">
-                                            <img src="https://www.pngkit.com/png/detail/46-462685_people-icons-png-inquiry-icon.png" className='student-image'/>
-                                        </div>
-                                        <div className="col-md-7">
-                                            <ul className='list-group'>
-                                                <li className='list-group-item list-group-item-action'>
-                                                    name : <span>Sahan</span>
-                                                </li>
-                                                <li className='list-group-item list-group-item-action'>
-                                                    index : 22813
-                                                </li>
-                                                <li className='list-group-item list-group-item-action'>
-                                                    Description : Lorem ipsum dolor sit amet consectetur adipisicing elit. Quaerat, ab possimus ea debitis 
-                                                                  error ad temporibus vitae voluptatem quibusdam quidem necessitatibus ex perspiciatis nisi 
-                                                                  molestias. Fuga exercitationem voluptatem accusamus provident.
-                                                </li>
-                                            </ul>
-                                        </div>
-                                    </div>
-                                    <div className="col-md-1">
-                                        <Link to={'/students/view/:contactID'} className='btn btn-warning'>
-                                            <i className='fa fa-eye'/>
-                                        </Link>
-                                        <Link to={'/students/edit/:contactID'} className='btn btn-primary'>
-                                            <i className='fa fa-pen'/>
-                                        </Link>
-                                        <button className='btn btn-danger'>
-                                            <i className='fa fa-trash'/>
-                                        </button>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div className="col-md-6">
-                            <div className="card">
-                                <div className="card-body">
-                                    <div className='row align-items-center'>
-                                        <div className="col-md-4">
-                                            <img src="https://www.pngkit.com/png/detail/46-462685_people-icons-png-inquiry-icon.png" className='student-image'/>
-                                        </div>
-                                        <div className="col-md-7">
-                                            <ul className='list-group'>
-                                                <li className='list-group-item list-group-item-action'>
-                                                    name : <span>Sahan</span>
-                                                </li>
-                                                <li className='list-group-item list-group-item-action'>
-                                                    index : 22813
-                                                </li>
-                                                <li className='list-group-item list-group-item-action'>
-                                                    Description : Lorem ipsum dolor sit amet consectetur adipisicing elit. Quaerat, ab possimus ea debitis 
-                                                                  error ad temporibus vitae voluptatem quibusdam quidem necessitatibus ex perspiciatis nisi 
-                                                                  molestias. Fuga exercitationem voluptatem accusamus provident.
-                                                </li>
-                                            </ul>
-                                        </div>
-                                    </div>
-                                    <div className="col-md-1">
-                                        <Link to={'/students/view/:contactID'} className='btn btn-warning'>
-                                            <i className='fa fa-eye'/>
-                                        </Link>
-                                        <Link to={'/students/edit/:contactID'} className='btn btn-primary'>
-                                            <i className='fa fa-pen'/>
-                                        </Link>
-                                        <button className='btn btn-danger'>
-                                            <i className='fa fa-trash'/>
-                                        </button>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div className="col-md-6">
-                            <div className="card">
-                                <div className="card-body">
-                                    <div className='row align-items-center'>
-                                        <div className="col-md-4">
-                                            <img src="https://www.pngkit.com/png/detail/46-462685_people-icons-png-inquiry-icon.png" className='student-image'/>
-                                        </div>
-                                        <div className="col-md-7">
-                                            <ul className='list-group'>
-                                                <li className='list-group-item list-group-item-action'>
-                                                    name : <span>Sahan</span>
-                                                </li>
-                                                <li className='list-group-item list-group-item-action'>
-                                                    index : 22813
-                                                </li>
-                                                <li className='list-group-item list-group-item-action'>
-                                                    Description : Lorem ipsum dolor sit amet consectetur adipisicing elit. Quaerat, ab possimus ea debitis 
-                                                                  error ad temporibus vitae voluptatem quibusdam quidem necessitatibus ex perspiciatis nisi 
-                                                                  molestias. Fuga exercitationem voluptatem accusamus provident.
-                                                </li>
-                                            </ul>
-                                        </div>
-                                    </div>
-                                    <div className="col-md-1">
-                                        <Link to={'/students/view/:contactID'} className='btn btn-warning'>
-                                            <i className='fa fa-eye'/>
-                                        </Link>
-                                        <Link to={'/students/edit/:contactID'} className='btn btn-primary'>
-                                            <i className='fa fa-pen'/>
-                                        </Link>
-                                        <button className='btn btn-danger'>
-                                            <i className='fa fa-trash'/>
-                                        </button>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div className="col-md-6">
-                            <div className="card">
-                                <div className="card-body">
-                                    <div className='row align-items-center'>
-                                        <div className="col-md-4">
-                                            <img src="https://www.pngkit.com/png/detail/46-462685_people-icons-png-inquiry-icon.png" className='student-image'/>
-                                        </div>
-                                        <div className="col-md-7">
-                                            <ul className='list-group'>
-                                                <li className='list-group-item list-group-item-action'>
-                                                    name : <span>Sahan</span>
-                                                </li>
-                                                <li className='list-group-item list-group-item-action'>
-                                                    index : 22813
-                                                </li>
-                                                <li className='list-group-item list-group-item-action'>
-                                                    Description : Lorem ipsum dolor sit amet consectetur adipisicing elit. Quaerat, ab possimus ea debitis 
-                                                                  error ad temporibus vitae voluptatem quibusdam quidem necessitatibus ex perspiciatis nisi 
-                                                                  molestias. Fuga exercitationem voluptatem accusamus provident.
-                                                </li>
-                                            </ul>
-                                        </div>
-                                    </div>
-                                    <div className="col-md-1">
-                                        <Link to={'/students/view/:contactID'} className='btn btn-warning'>
-                                            <i className='fa fa-eye'/>
-                                        </Link>
-                                        <Link to={'/students/edit/:contactID'} className='btn btn-primary'>
-                                            <i className='fa fa-pen'/>
-                                        </Link>
-                                        <button className='btn btn-danger'>
-                                            <i className='fa fa-trash'/>
-                                        </button>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
+                        )}
                     </div>
                 </div>
             </section>
         </React.Fragment>
     )
 };
+
+//d-flex flex-column align-items-center
 
 export default StudentList;

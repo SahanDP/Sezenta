@@ -6,6 +6,7 @@ import StudentList from './components/Students/StudentList/StudentList';
 import AddStudent from './components/Students/AddStudent/AddStudent';
 import ViewStudent from './components/Students/ViewStudent/ViewStudent';
 import EditStudent from './components/Students/EditStudent/EditStudent';
+import axios from 'axios';  //*** 
 
 let App = ()=> {
   return (
@@ -15,8 +16,8 @@ let App = ()=> {
         <Route path={'/'} element={<Navigate to={'/students/list'}/>}/>
         <Route path={'/students/list'} element={<StudentList/>}/>
         <Route path={'/students/add'} element={<AddStudent/>}/>
-        <Route path={'/students/view/:contactID'} element={<ViewStudent/>}/>
-        <Route path={'/students/edit/:contactID'} element={<EditStudent/>}/>
+        <Route path={'/students/view/:id'} element={<ViewStudent/>}/>
+        <Route path={'/students/edit/:id'} element={<EditStudent/>}/>
       </Routes>
     </React.Fragment>
   );
