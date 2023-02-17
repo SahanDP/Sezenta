@@ -38,7 +38,7 @@ let AddStudent = () => {
           </div>
           <div className="row">
             <div className="col-md-4">
-              <form>
+              <div>
                 <div className="mb-2">
                   <input
                     type="text"
@@ -69,7 +69,7 @@ let AddStudent = () => {
                     Cancel
                   </Link>
                 </div>
-              </form>
+              </div>
             </div>
           </div>
         </div>
